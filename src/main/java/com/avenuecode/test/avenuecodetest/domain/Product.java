@@ -1,17 +1,25 @@
 package com.avenuecode.test.avenuecodetest.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Data
 @Entity
+@EqualsAndHashCode(exclude = {"image"})
+@ToString(exclude = {"image"})
 public class Product {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private String name;
 
     @Column
     private String description;
@@ -20,7 +28,8 @@ public class Product {
     @JoinColumn(name = "product_parent_id")
     private Product parent;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    @JsonManagedReference
     private Set<Image> image;
 
 }

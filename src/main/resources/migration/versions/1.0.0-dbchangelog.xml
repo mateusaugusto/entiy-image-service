@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="Mateus Oliveira" id="273d7f77-a71a-4dc0-ade4-e4950fbeb241">
+        <createTable tableName="product">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_parent_id" type="BIGINT"/>
+        </createTable>
+        <addPrimaryKey tableName="product" constraintName="product_pk" columnNames="id"/>
+        <createSequence sequenceName="product_id_seq_"/>
+
+        <createTable tableName="image">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(200)"/>
+            <column name="product_id" type="BIGINT"/>
+        </createTable>
+
+        <addPrimaryKey tableName="image" constraintName="image_pk" columnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="image"
+                                 constraintName="product_image_fk"
+                                 baseColumnNames="product_id"
+                                 referencedTableName="product"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="product"
+                                 constraintName="product_product_fk"
+                                 baseColumnNames="product_parent_id"
+                                 referencedTableName="product"
+                                 referencedColumnNames="id"/>
+
+    </changeSet>
+
+
+</databaseChangeLog>
+
+
+

@@ -1,12 +1,14 @@
 package com.avenuecode.test.avenuecodetest.service.impl;
 
 import com.avenuecode.test.avenuecodetest.domain.Image;
+import com.avenuecode.test.avenuecodetest.dto.ImageDTO;
 import com.avenuecode.test.avenuecodetest.repository.ImageRepository;
 import com.avenuecode.test.avenuecodetest.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NoResultException;
+import java.util.List;
 
 @Service
 public class ImageServiceImpl implements ImageService {
@@ -49,8 +51,15 @@ public class ImageServiceImpl implements ImageService {
         this.getRepository().delete(image);
     }
 
+    @Override
+    public List<ImageDTO> findAllByProductId(Long productId){
+        return this.getRepository().findAllImagesByProductId(productId);
+    }
+
     private Image buildImage(Image image) {
         Image imageToUpdate = this.findById(image.getId());
+        imageToUpdate.setType(image.getType());
+        imageToUpdate.setProduct(image.getProduct());
         return imageToUpdate;
     }
 }
