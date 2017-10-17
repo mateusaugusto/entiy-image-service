@@ -1,0 +1,26 @@
+eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+.directory
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+*.tlog
+*~
+
+maven-wrapper.properties
+mvnw.*
+mvnw
+npm-debug.log
+  
