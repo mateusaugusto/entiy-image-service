@@ -1,12 +1,9 @@
 package com.avenuecode.test.avenuecodetest;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.ActiveProfiles;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+@ActiveProfiles(profiles = "postgres")
 public class AvenueCodeTestApplicationTests {
 
 	@Test

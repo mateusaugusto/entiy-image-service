@@ -6,12 +6,13 @@ import com.avenuecode.test.avenuecodetest.repository.ProductRepository;
 import com.avenuecode.test.avenuecodetest.service.ImageService;
 import com.avenuecode.test.avenuecodetest.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NoResultException;
 import java.util.List;
 
-@Service
+@Component
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
