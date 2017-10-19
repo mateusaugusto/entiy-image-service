@@ -6,8 +6,9 @@ import java.util.Map;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.avenuecode.test.avenuecodetest.exception.DefaultExceptionAttributes;
-import com.avenuecode.test.avenuecodetest.exception.ExceptionAttributes;
+
+import com.avenuecode.test.avenuecodetest.infrastructure.exception.DefaultExceptionAttributes;
+import com.avenuecode.test.avenuecodetest.infrastructure.exception.ExceptionAttributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

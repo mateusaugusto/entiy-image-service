@@ -23,12 +23,12 @@ public class ProductController extends BaseController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<Product> create(@RequestBody Product product) {
+    ResponseEntity<?> create(@RequestBody Product product) {
         return new ResponseEntity<>(productService.save(product), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    ResponseEntity<Product> updatePessoa(@PathVariable("id") Long id, @RequestBody Product product) {
+    ResponseEntity<?> updatePessoa(@PathVariable("id") Long id, @RequestBody Product product) {
 
         if (id == null) {
             logger.error("Unable to update. Product with id {} not found.", id);

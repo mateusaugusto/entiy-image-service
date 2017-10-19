@@ -3,7 +3,17 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-    <changeSet author="Mateus Oliveira" id="273d7f77-a71a-4dc0-ade4-e4950fbeb241">
+    <changeSet author="Mateus Oliveira" id="a19ab230-a5e5-4434-9eed-6b6c2dd78e4a">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="product"/>
+                <tableExists tableName="users"/>
+                <tableExists tableName="image"/>
+            </not>
+        </preConditions>
+
+
         <createTable tableName="product">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false"/>
@@ -16,8 +26,25 @@
             </column>
             <column name="product_parent_id" type="BIGINT"/>
         </createTable>
+
         <addPrimaryKey tableName="product" constraintName="product_pk" columnNames="id"/>
         <createSequence sequenceName="product_id_seq_"/>
+
+        <createTable tableName="users">
+            <column name="user_id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="BOOL"/>
+        </createTable>
+
+        <addPrimaryKey tableName="users" constraintName="users_pk" columnNames="user_id"/>
+        <createSequence sequenceName="users_id_seq"/>
 
         <createTable tableName="image">
             <column name="id" type="BIGINT" autoIncrement="true">
@@ -42,6 +69,22 @@
                                  referencedColumnNames="id"/>
 
     </changeSet>
+
+    <changeSet id="2cb8488d-d0d0-46f4-800d-8c2dd5a27b8c" author="Mateus Oliveira">
+
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">select count(*) from users</sqlCheck>
+        </preConditions>
+
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="password" value="$2a$10$D4OLKI6yy68crm.3imC9X.P2xqKHs5TloWUcr6z5XdOqnTrAK84ri"/>
+            <column name="enabled" valueBoolean="true"/>
+        </insert>
+
+    </changeSet>
+
+
 
 
 </databaseChangeLog>

@@ -1,4 +1,4 @@
-package com.avenuecode.test.avenuecodetest.exception;
+package com.avenuecode.test.avenuecodetest.infrastructure.exception;
 
 import java.util.Map;
 

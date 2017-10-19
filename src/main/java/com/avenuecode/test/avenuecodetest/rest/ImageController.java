@@ -25,12 +25,12 @@ public class ImageController extends BaseController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<Image> create(@RequestBody Image image) {
+    ResponseEntity<?> create(@RequestBody Image image) {
         return new ResponseEntity<>(imageService.save(image), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    ResponseEntity<Image> updatePessoa(@PathVariable("id") Long id, @RequestBody Image image) {
+    ResponseEntity<?> updatePessoa(@PathVariable("id") Long id, @RequestBody Image image) {
 
         if (id == null) {
             logger.error("Unable to update. Product with id {} not found.", id);
@@ -43,7 +43,7 @@ public class ImageController extends BaseController {
     }
 
     @RequestMapping(value = "/all/product/{id}", method = RequestMethod.GET)
-    ResponseEntity<List<ImageDTO>> getAllImagesByProductId(@PathVariable("id") Long id) {
+    ResponseEntity<List<?>> getAllImagesByProductId(@PathVariable("id") Long id) {
 
         List<ImageDTO> listImages = imageService.findAllByProductId(id);
 

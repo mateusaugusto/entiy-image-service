@@ -25,19 +25,9 @@ public abstract class AbstractControllerTest extends AbstractTest {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
-    protected void setUp(BaseController controller) {
-        mvc = MockMvcBuilders.standaloneSetup(controller).build();
-    }
-
     protected String mapToJson(Object obj) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(obj);
-    }
-
-    protected <T> T mapFromJson(String json, Class<T> clazz)
-            throws JsonParseException, JsonMappingException, IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(json, clazz);
     }
 
 }
